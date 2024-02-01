@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
-
+set -o pipefail
 # Stop the running container (if any)
-echo "Hi"
-containerid=docker ps | awk -F " " '{print $1}' | tail -1
-docker rm -f $containerid
+echo "removing container..."
+containerid=`sudo docker ps | awk -F" " '{print $1}' | tail -1`
+printf "Stopping %s" $containerid
+sudo docker rm -f $containerid
